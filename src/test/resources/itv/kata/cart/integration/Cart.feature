@@ -3,6 +3,16 @@ Feature: Cart
     When new cart
     Then calculateTotalCost should return 0
 
+    Scenario: Should handle basic cart without offers;
+    Given The following pricing
+    | sku | price | offer |
+    | A   | 50    |       |
+    | B   | 30    |       |
+    When We have cart with
+    | sku | quantity |
+    | A   |  2       |
+    | B   |  4       |
+    Then calculateTotalCost should return 220
 
 #  Scenario: Cart should handle complex pricing and offers;
 #    Given The following pricing

@@ -28,3 +28,15 @@ Feature: Cart
     | C   |  2       |
     | D   |  1       |
     Then calculateTotalCost should return 325
+
+  Scenario: Handle multiple checkouts of the same item
+    Given The following pricing
+      | sku | price | offer |
+      | A   | 5     |       |
+      | B   | 2     |       |
+    When We have cart with
+      | sku | quantity |
+      | A   |  4       |
+      | B   |  4       |
+      | A   |  4       |
+    Then calculateTotalCost should return 48

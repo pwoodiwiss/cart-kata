@@ -9,6 +9,11 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class StoreTest {
     @Test
@@ -54,5 +59,22 @@ public class StoreTest {
         itemQty.put("Z", 3);
         itemQty.put("Q", 5);
         assertEquals(53, store.calculateCost(itemQty));
+    }
+
+    @Test
+    void shouldCallItemOfferWhenCalculating() {
+        Store store = new Store();
+        ItemOffer offer = mock(ItemOffer.class);
+
+        ItemOffer.CalculateResult result = new ItemOffer.CalculateResult();
+        result.total = 100;
+        result.remainder = 0;
+        when(offer.calculate(anyInt())).thenReturn(result);
+
+        store.addItemPrice("Z", 0, offer);
+
+        assertEquals(100, store.calculateCost(Collections.singletonMap("Z", 5)));
+        verify(offer).calculate(eq(5));
+
     }
 }

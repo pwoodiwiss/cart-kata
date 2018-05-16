@@ -1,4 +1,4 @@
-package itv.kata.cart.integration;
+package itv.kata.integration;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;

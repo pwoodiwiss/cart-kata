@@ -1,4 +1,4 @@
-package itv.kata.cart.integration.steps;
+package itv.kata.integration.steps;
 
 import cucumber.api.DataTable;
 import cucumber.api.java8.En;
